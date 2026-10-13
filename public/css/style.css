@@ -3,7 +3,8 @@ body {
   max-width: 600px;
   margin: 40px auto;
   padding: 0 16px;
-  color: #222;
+  background: #1a1a1a;
+  color: #e8e8e8;
   line-height: 1.5;
 }
 
@@ -27,11 +28,28 @@ input, textarea {
   padding: 8px;
   font-family: inherit;
   font-size: 14px;
+  background: #2a2a2a;
+  color: #e8e8e8;
+  border: 1px solid #444;
+  border-radius: 4px;
 }
 
-input[type="submit"], button {
+input[type="submit"], button, a.button {
+  display: inline-block;
   width: auto;
   cursor: crosshair;
+  background: #333;
+  color: #e8e8e8;
+  border: 1px solid #555;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+input[type="submit"]:hover, button:hover, a.button:hover {
+  background: #444;
 }
 
 .post {
@@ -43,14 +61,18 @@ input[type="submit"], button {
 }
 
 .post p em {
-  color: #777;
+  color: #999;
   font-size: 13px;
+}
+
+.post a {
+  color: #6fa8dc;
 }
 
 hr {
   margin: 24px 0;
   border: none;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid #444;
 }
 
 .post button {
@@ -58,11 +80,38 @@ hr {
   border: none;
   padding: 0;
   font: inherit;
-  color: #a33;
+  color: #e07a7a;
   cursor: crosshair;
   text-decoration: underline;
 }
 
 .post button:hover {
-  color: #822;
+  color: #f09090;
 }
+
+.error {
+  color: #b00020;
+  font-weight: 500;
+}
+
+img, form, input, textarea {
+  max-width: 100%;
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 12px;
+  }
+  input, textarea, button {
+    width: 85%;
+  }
+}
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  a.button {
+    margin-left: 8px;
+  }

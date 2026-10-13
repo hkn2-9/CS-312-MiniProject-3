@@ -9,24 +9,32 @@
 </head>
 <body>
 
-<h1>BIG BEAUTIFUL CHATROOM</h1>
+<h1>EVIL VILLAIN LAIR</h1>
 
-<form action="/posts" method="POST">
-  <label for="author">Your name</label>
-  <input type="text" id="author" name="author" required></input>
+<img src="/css/atomic.gif" alt="Animated GIF description" width="300" height="200">
 
-  <label for="title">Title</label>
-  <input type="text" id="title" name="title" required></input>
+<% if (user) { %>
+  <p>Signed in as <strong><%= user.name %></strong></p>
+  <form action="/signout" method="POST">
+    <button type="submit">Sign Out</button>
+  </form>
 
-  <label for="content">Content</label>
-  <textarea id="content" name="content" required></textarea>
+  <form action="/posts" method="POST">
+    <label for="title">Title</label>
+    <input type="text" id="title" name="title" required />
 
-  <input type="submit" value="Publish Post"></input>
-</form>
+    <label for="content">Content</label>
+    <textarea id="content" name="content" required></textarea>
+
+    <input type="submit" value="Create Post" />
+  </form>
+<% } else { %>
+  <p><a href="/signin" class="button">Sign In</a> or <a href="/signup" class="button">Sign Up</a></p>
+<% } %>
 
 <hr />
 
-<h2>All Posts</h2>
+<h2>Posts</h2>
 
 <% if (posts.length === 0) { %>
   <p>No posts yet.</p>
@@ -34,14 +42,17 @@
   <% posts.forEach(function(post) { %>
     <div class="post">
       <h3><%= post.title %></h3>
-      <p><em>by <%= post.author %> — <%= post.createdAt %></em></p>
-      <p><%= post.content %></p>
-      <a href="/posts/<%= post.id %>/edit">Edit</a>
-      <form action="/posts/<%= post.id %>/delete" method="POST">
-        <button type="submit">Delete</button>
-    </form>
+      <p><em> by <%= post.creator_name %> - <%= new Date(post.date_created).toLocaleDateString() %></em></p>
+      <p><%= post.body %></p>
+
+      <% if (user && user.user_id === post.creator_user_id) { %>
+        <a href="/posts/<%= post.blog_id %>/edit">Edit</a>
+        <form action="/posts/<%= post.blog_id %>/delete" method="POST">
+          <button type="submit">Delete</button>
+        </form>
+      <% } %>
     </div>
-  <% }) %>
+  <% }); %>
 <% } %>
 
 </body>
